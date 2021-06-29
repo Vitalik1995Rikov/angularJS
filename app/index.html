@@ -7,12 +7,13 @@
     <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-    <div ng-controller = 'firstCtrl'>
-        {{hello}}
-        {{getBookmark()}}
-        <button ng-click="setHello('Foo')">Foo</button>
-        <button ng-click="setHello('Bar')">Bar</button>
-        {{myFactory.hello()}}
+    <div ng-controller = 'myBooksCtrl'>
+        <div ng-controller = 'angularBookCtrl'>
+            <button ng-click='showBook()'>Show AngularBook</button>
+        </div>
+        <div ng-controller = 'emberBookCtrl'>
+            <button ng-click='showBook()'>Show EmberBook</button>
+        </div>
     </div>
 </body>
 </html>

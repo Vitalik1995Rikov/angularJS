@@ -1,23 +1,17 @@
 let app = angular.module('app', []);
 
-app.controller('firstCtrl', function($scope, myFactory) {
-    $scope.hello = 'hello world';
-
-    $scope.myFactory = myFactory;
-
-    $scope.getBookmark = function() {
-        return 'My bookmark';
-    }
-
-    $scope.setHello = function (text) {
-        $scope.hello = text;
+app.controller('myBooksCtrl', function ($scope) {
+    $scope.showBook = function () {
+        console.log('This is some Book');
     }
 });
 
-app.factory('myFactory', function() {
-    return {
-        hello: function() {
-            return 'hello world'
-        }
-    }    
+app.controller('angularBookCtrl', function ($scope) {
+    $scope.showBook = function () {
+        console.log('This is AngularJS Book');
+    }
+});
+
+app.controller('emberBookCtrl', function ($scope) {
+
 });
