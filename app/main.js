@@ -1,17 +1,25 @@
 let app = angular.module('app', []);
 
-app.controller('booksCtrl', function($scope) {
+app.controller('firstCtrl', function($scope) {
     $scope.name = 'Harry';
-    console.log('scope from ctrl', $scope);
+    $scope.color = '#333333';
+    $scope.reverse = function () {
+        $scope.name = $scope.name.split('').reverse().join('');
+    };
 });
 
-app.directive('book', function(){
+app.directive('fooBar', function(){
     return {
-        scope: true,
-        template: '<div>My name is {{name}}<input type="text" ng-model="name"></div>',
+        scope: {
+            name: '@',
+            color: '=',
+            reverse: '&'
+        },
+        template: '<div>My name is {{name}} <input type="text" ng-model="name"></div>' + 
+        '<div>My color is {{color}} <input type="text" ng-model="color"></div>' +
+        '<button ng-click="reverse()">Reverse</button>',
         link: function (scope, element, attrs) {
-            console.log('scope from directive', scope);
-            console.log(scope.name);
+            console.log('fooBar');
         }
     }
-})
+});
