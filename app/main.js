@@ -1,30 +1,23 @@
 let app = angular.module('app', []);
 
-app.run(function ($templateCache) {
-    $templateCache.put('bookmarks.html', '<div ng-repeat="bookmark in bookmarks">{{bookmark.name}}</div>')
+app.controller('mainCtrl', function($scope) {
+    console.log('ctrl scope', $scope);
+    $scope.posts = [
+        {
+            name: 'This is post about cats'
+        },
+        {
+            name: 'This is post about dogs'
+        }
+    ];
 });
 
-app.directive('fooBar', function($templateCache) {
-    let bookmarks = [
-        {
-            id: 1,
-            name: 'EmberJS'
-        },
-        {
-            id: 2,
-            name: 'AngularJS'
-        },
-        {
-            id: 3,
-            name: 'NodeJS'
-        },
-    ];
+app.directive('post', function(){
     return {
-        restrict: 'E',
-        templateUrl: 'bookmarks.html',
+        scope: false,
+        template: '<div ng-repeat="post in posts">{{post.name}}</div>',
         link: function (scope, element, attrs) {
-            console.log($templateCache.info());
-            scope.bookmarks = bookmarks;
+            console.log('scope', scope);
         }
     }
-});
+})
