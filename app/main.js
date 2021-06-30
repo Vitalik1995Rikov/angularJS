@@ -1,20 +1,26 @@
 let app = angular.module('app', []);
 
-app.controller('mainCtrl', function ($scope) {
-    $scope.name = 'Bob'
-});
-
 app.directive('fooBar', function() {
+    let bookmarks = [
+        {
+            id: 1,
+            name: 'EmberJS'
+        },
+        {
+            id: 2,
+            name: 'AngularJS'
+        },
+        {
+            id: 3,
+            name: 'NodeJS'
+        },
+    ];
     return {
         restrict: 'E',
-        transclude: true,
-        template: 'This is my super directive',
-        link: function(scope, element, attrs, ctrl, transclude) {
-            console.log('This is my super directive');
-            transclude(scope, function(clone, scope) {
-                console.log('!', clone, scope);
-                element.append(clone);
-            });
+        templateUrl: 'bookmarks.html',
+        link: function (scope, element, attrs) {
+            console.log('directive');
+            scope.bookmarks = bookmarks;
         }
     }
 });
