@@ -1,4 +1,25 @@
-let app = angular.module('app', []);
+let app = angular.module('app', ['ngMockE2E']);
+
+app.run(function ($httpBackend) {
+    let books = [
+        {
+            name: 'AngularJS'
+        },
+        {
+            name: 'EmberJS'
+        },
+        {
+            name: 'ReactJS'
+        }
+    ];
+
+    $httpBackend.whenGET('http://localhost:3001/books').respond(200, books);
+    $httpBackend.whenPOST('http://localhost:3001/books').respond(function (method, url, data) {
+        let result = JSON.parse(data);
+        books.push(result);
+        return [200, result];
+    });
+});
 
 app.controller('mainCtrl', function($http, $scope) {
     $http({
@@ -23,25 +44,3 @@ app.controller('mainCtrl', function($http, $scope) {
             console.log('Error in book post');
         });
 }});
-
-
-
-
-
-
-
-// этот вариант почему-то не работал
-
-
-// let app = angular.module('app', []);
-
-// app.controller('mainCtrl', function($http, $scope) {
-//     $http.get('http://localhost:3001/books')
-//         .success(function (result) {
-//             console.log('success', result);
-//             $scope.books = result;
-//         })
-//         .error(function (result) {
-//             console.log('error');
-//         });
-// });
